@@ -1,0 +1,1 @@
+<h2>minimum-operations-to-make-binary-array-elements-equal-to-one-i Notes</h2><hr>[ Time taken: 1d 11hrs 41m 27s ]

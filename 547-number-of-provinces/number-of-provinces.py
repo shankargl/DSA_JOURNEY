@@ -5,6 +5,7 @@ class Solution:
             for j in add_arr[node]:
                 if not visited[j]:
                     dfs(j,add_arr,visited)
+        
         n=len(num)
         m=len(num[0])
         add_arr=[[] for _ in range(n)]

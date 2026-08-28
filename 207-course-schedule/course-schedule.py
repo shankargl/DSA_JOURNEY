@@ -1,36 +1,40 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
 
-        def dfs(n, add_list, vis):
+        def topologicalSort(n, edges):
 
-            vis[n] = 1
+            graph = [[] for _ in range(n)]
 
-            for i in add_list[n]:
+            indegree = [0] * n
 
-                if vis[i] == 1:
-                    return True
+            for u, v in edges:
+                graph[u].append(v)
+                indegree[v] += 1
 
-                if vis[i] == 0:
-                    if dfs(i, add_list, vis):
-                        return True
+            
+            q = deque()
 
-            vis[n] = 2
+            for i in range(n):
+                if indegree[i] == 0:
+                    q.append(i)
 
-            return False
+            ans = []
 
-        add_list = [[] for _ in range(numCourses)]
+            
+            while q:
 
-        for u, v in prerequisites:
-            add_list[v].append(u)
+                node = q.popleft()
+                ans.append(node)
 
-        vis = [0] * numCourses
+                for neighbor in graph[node]:
 
-        for i in range(numCourses):
+                    indegree[neighbor] -= 1
 
-            if vis[i] == 0:
+                    if indegree[neighbor] == 0:
+                        q.append(neighbor)
 
-                if dfs(i, add_list, vis):
-                    return False
+            if len(ans) != n:
+                return False
 
-        return True
-        
+            return True
+        return topologicalSort(numCourses, prerequisites)

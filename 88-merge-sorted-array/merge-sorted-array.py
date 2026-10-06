@@ -6,9 +6,12 @@ class Solution:
         arr=[]
         for i in range(m):
             arr.append(nums1[i])
+        
         for j in range(n):
             arr.append(nums2[j])
 
         arr.sort()
+
         for k in range(len(nums1)):
             nums1[k]=arr[k]
+            

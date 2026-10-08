@@ -13,7 +13,5 @@ class Solution:
                 if count>=1:
                     ans+=ch
         return ans
-
-
         
             

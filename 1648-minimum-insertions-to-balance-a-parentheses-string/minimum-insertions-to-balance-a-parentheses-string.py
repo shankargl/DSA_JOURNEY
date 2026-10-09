@@ -1,21 +1,34 @@
 class Solution:
     def minInsertions(self, s: str) -> int:
-        ans = 0
-        need = 0
-
-        for ch in s:
-            if ch == '(':
-                if need % 2 == 1:
-                    ans += 1
-                    need -= 1
-
-                need += 2
-
+        res = 0
+        st = []
+        new_s = []
+        
+        cnt = 0
+        for c in s:
+            if c == '(':
+                if cnt == 1:
+                    new_s.append(')')
+                    res += 1
+                new_s.append(c)
+                cnt = 0
             else:
-                need -= 1
+                cnt += 1
+                if cnt == 2:
+                    new_s.append(')')
+                    cnt = 0
+        if cnt == 1:
+            res += 1
+            new_s.append(')')
 
-                if need < 0:
-                    ans += 1
-                    need = 1
+        s = new_s
+        for c in s:
+            if c == ')':
+                if not st:
+                    res += 1
+                else: st.pop()    
+            else:
+                st.append(c)
 
-        return ans + need
+        return res + 2 * len(st)
+
